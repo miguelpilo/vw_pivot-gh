@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Tabela Pivot Dinâmica</title>
+<style>
+html, body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-size: clamp(10px, 1.2vw, 14px);
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 4px;
+}
+th {
+  background-color: #0078d4;
+  color: #fff;
+  position: sticky;
+  top: 0;
+}
+td.center { text-align: center; }
+tr:hover { background-color: #f1f1f1; }
+.subtotal { font-weight: bold; background-color: #f0f8ff; }
+button.month-btn, button.ano-btn {
+  background:none;
+  border:none;
+  color:#0078d4;
+  font-weight:bold;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div id="tabelaContainer"></div>
+
+<script>
+const dadosAgrupados = {"2024": {"setembro": {"WEB": {"V": 694.0, "C": 69.0, "MesNum": 9}}, "outubro": {"WEB": {"V": 2160.0, "C": 216.0, "MesNum": 10}}, "novembro": {"DECO": {"V": 292.0, "C": 29.0, "MesNum": 11}, "WEB": {"V": 1234.0, "C": 123.0, "MesNum": 11}}, "dezembro": {"DECO": {"V": 2346.0, "C": 235.0, "MesNum": 12}, "WEB": {"V": 2232.0, "C": 223.0, "MesNum": 12}}}, "2025": {"janeiro": {"DECO": {"V": 150.0, "C": 5.0, "MesNum": 1}, "WEB": {"V": 1231.0, "C": 123.0, "MesNum": 1}}, "fevereiro": {"DECO": {"V": 333.0, "C": 12.0, "MesNum": 2}, "WEB": {"V": 1731.0, "C": 173.0, "MesNum": 2}}, "março": {"DECO": {"V": 140.0, "C": 5.0, "MesNum": 3}, "WEB": {"V": 1594.0, "C": 159.0, "MesNum": 3}}, "abril": {"DECO": {"V": 306.0, "C": 11.0, "MesNum": 4}, "WEB": {"V": 1272.0, "C": 127.0, "MesNum": 4}}, "maio": {"DECO": {"V": 67.0, "C": 2.0, "MesNum": 5}, "WEB": {"V": 1526.0, "C": 153.0, "MesNum": 5}}, "junho": {"DECO": {"V": 244.0, "C": 9.0, "MesNum": 6}, "WEB": {"V": 2541.0, "C": 254.0, "MesNum": 6}}, "julho": {"DECO": {"V": 71.0, "C": 2.0, "MesNum": 7}, "WEB": {"V": 2981.0, "C": 298.0, "MesNum": 7}}, "agosto": {"DECO": {"V": 80.0, "C": 3.0, "MesNum": 8}, "WEB": {"V": 1852.0, "C": 185.0, "MesNum": 8}}, "setembro": {"DECO": {"V": 62.0, "C": 2.0, "MesNum": 9}, "WEB": {"V": 1031.0, "C": 103.0, "MesNum": 9}}, "outubro": {"DECO": {"V": 217.0, "C": 8.0, "MesNum": 10}, "WEB": {"V": 1684.0, "C": 168.0, "MesNum": 10}}, "novembro": {"DECO": {"V": 2.0, "C": 0.0, "MesNum": 11}, "WEB": {"V": 1705.0, "C": 171.0, "MesNum": 11}}, "dezembro": {"DECO": {"V": 183.0, "C": 6.0, "MesNum": 12}, "WEB": {"V": 520.0, "C": 52.0, "MesNum": 12}}}};
+let mesesAbertos = {};
+let anosAbertos = {};
+
+for (const ano in dadosAgrupados) {
+  anosAbertos[ano] = true;
+}
+
+function renderTabela() {
+  let html = '<table><thead><tr><th>Ano</th><th>Mês</th><th>LeadSource</th><th class="center">Valor (€)</th><th class="center">ValorCalculado (€)</th></tr></thead><tbody>';
+
+  for (const ano in dadosAgrupados) {
+    const meses = dadosAgrupados[ano];
+    const anoAberto = anosAbertos[ano];
+
+    // ordenar meses por MesNum
+    const mesesOrdenados = Object.keys(meses).sort((a,b) => meses[a][Object.keys(meses[a])[0]].MesNum - meses[b][Object.keys(meses[b])[0]].MesNum);
+
+
+    let anoRowspan = 0;
+    if (anoAberto) {
+      for (const mes of mesesOrdenados) {
+        const leads = Object.keys(meses[mes]);
+        anoRowspan += mesesAbertos[`${ano}-${mes}`] ? leads.length : 1;
+      }
+    } else {
+      anoRowspan = 1;
+    }
+
+    let anoPrimeira = true;
+
+    if (anoAberto) {
+      for (const mes of mesesOrdenados) {
+        const Ss = meses[mes];
+        const aberto = mesesAbertos[`${ano}-${mes}`] || false;
+        let mesPrimeira = true;
+        const leads = Object.keys(Ss);
+
+        if (aberto) {
+          for (const lead of leads) {
+            const d = Ss[lead];
+            html += '<tr>';
+            if (anoPrimeira) {
+              html += `<td rowspan="${anoRowspan}"><button class="ano-btn" data-ano="${ano}">${ano}</button></td>`;
+              anoPrimeira = false;
+            }
+            if (mesPrimeira) {
+              html += `<td rowspan="${leads.length}"><button class="month-btn" data-ano="${ano}" data-mes="${mes}">${mes}</button></td>`;
+              mesPrimeira = false;
+            }
+            html += `<td>${lead}</td>
+                     <td class="center">${d.V.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td>
+                     <td class="center">${d.C.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td></tr>`;
+          }
+        } else {
+          let t1=0, t2=0;
+          for (const lead of leads) {
+            t1 += Ss[lead].V;
+            t2 += Ss[lead].C;
+          }
+          html += '<tr>';
+          if (anoPrimeira) {
+            html += `<td rowspan="${anoRowspan}"><button class="ano-btn" data-ano="${ano}">${ano}</button></td>`;
+            anoPrimeira = false;
+          }
+          html += `<td colspan="2"><button class="month-btn" data-ano="${ano}" data-mes="${mes}">${mes}</button></td>
+                   <td class="center">${t1.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td>
+                   <td class="center">${t2.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td></tr>`;
+        }
+      }
+    } else {
+      let t1=0, t2=0;
+      for (const mes of mesesOrdenados) {
+        for (const lead in meses[mes]) {
+          t1 += meses[mes][lead].V;
+          t2 += meses[mes][lead].C;
+        }
+      }
+      html += `<tr>
+        <td colspan="3"><button class="ano-btn" data-ano="${ano}">${ano}</button></td>
+        <td class="center subtotal">${t1.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td>
+        <td class="center subtotal">${t2.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td>
+      </tr>`;
+    }
+  }
+
+  html += '</tbody></table>';
+  document.getElementById("tabelaContainer").innerHTML = html;
+
+  document.querySelectorAll(".month-btn").forEach(b => {
+    b.onclick = () => {
+      const k = `${b.dataset.ano}-${b.dataset.mes}`;
+      mesesAbertos[k] = !mesesAbertos[k];
+      renderTabela();
+    };
+  });
+
+  document.querySelectorAll(".ano-btn").forEach(b => {
+    b.onclick = () => {
+      anosAbertos[b.dataset.ano] = !anosAbertos[b.dataset.ano];
+      renderTabela();
+    };
+  });
+}
+
+renderTabela();
+</script>
+
+</body>
+</html>

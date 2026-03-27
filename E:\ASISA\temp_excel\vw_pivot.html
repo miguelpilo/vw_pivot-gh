@@ -42,7 +42,7 @@ button.month-btn, button.ano-btn {
 <div id="tabelaContainer"></div>
 
 <script>
-const dadosAgrupados = {"2024": {"setembro": {"WEB": {"V": 694.0, "C": 69.0, "MesNum": 9}}, "outubro": {"WEB": {"V": 2160.0, "C": 216.0, "MesNum": 10}}, "novembro": {"DECO": {"V": 265.0, "C": 26.0, "MesNum": 11}, "WEB": {"V": 1234.0, "C": 123.0, "MesNum": 11}}, "dezembro": {"DECO": {"V": 2292.0, "C": 229.0, "MesNum": 12}, "WEB": {"V": 2232.0, "C": 223.0, "MesNum": 12}}}, "2025": {"janeiro": {"DECO": {"V": 150.0, "C": 5.0, "MesNum": 1}, "WEB": {"V": 1231.0, "C": 123.0, "MesNum": 1}}, "fevereiro": {"DECO": {"V": 380.0, "C": 13.0, "MesNum": 2}, "WEB": {"V": 1802.0, "C": 180.0, "MesNum": 2}}, "março": {"DECO": {"V": 155.0, "C": 5.0, "MesNum": 3}, "WEB": {"V": 1663.0, "C": 166.0, "MesNum": 3}}, "abril": {"DECO": {"V": 346.0, "C": 12.0, "MesNum": 4}, "WEB": {"V": 1294.0, "C": 129.0, "MesNum": 4}}, "maio": {"DECO": {"V": 67.0, "C": 2.0, "MesNum": 5}, "WEB": {"V": 1470.0, "C": 147.0, "MesNum": 5}}, "junho": {"DECO": {"V": 244.0, "C": 9.0, "MesNum": 6}, "WEB": {"V": 2541.0, "C": 254.0, "MesNum": 6}}, "julho": {"DECO": {"V": 59.0, "C": 2.0, "MesNum": 7}, "WEB": {"V": 3022.0, "C": 302.0, "MesNum": 7}}, "agosto": {"DECO": {"V": 80.0, "C": 3.0, "MesNum": 8}, "WEB": {"V": 1799.0, "C": 180.0, "MesNum": 8}}, "setembro": {"DECO": {"V": 62.0, "C": 2.0, "MesNum": 9}, "WEB": {"V": 1009.0, "C": 101.0, "MesNum": 9}}, "outubro": {"DECO": {"V": 217.0, "C": 8.0, "MesNum": 10}, "WEB": {"V": 1654.0, "C": 165.0, "MesNum": 10}}, "novembro": {"DECO": {"V": 2.0, "C": 0.0, "MesNum": 11}, "WEB": {"V": 1670.0, "C": 167.0, "MesNum": 11}}, "dezembro": {"DECO": {"V": 803.0, "C": 28.0, "MesNum": 12}, "WEB": {"V": 3644.0, "C": 364.0, "MesNum": 12}}}, "2026": {"janeiro": {"DECO": {"V": 13.0, "C": 0.0, "MesNum": 1}, "WEB": {"V": 826.0, "C": 83.0, "MesNum": 1}}, "fevereiro": {"DECO": {"V": 177.0, "C": 6.0, "MesNum": 2}, "WEB": {"V": 923.0, "C": 92.0, "MesNum": 2}}, "março": {"DECO": {"V": 22.0, "C": 1.0, "MesNum": 3}, "WEB": {"V": 982.0, "C": 98.0, "MesNum": 3}}}};
+const dadosAgrupados = {"2024": {"setembro": {"WEB": {"V": 694.0, "C": 69.0, "MesNum": 9, "X": 0.0}}, "outubro": {"WEB": {"V": 2160.0, "C": 216.0, "MesNum": 10, "X": 0.0}}, "novembro": {"DECO": {"V": 265.0, "C": 26.0, "MesNum": 11, "X": 0.0}, "WEB": {"V": 1234.0, "C": 123.0, "MesNum": 11, "X": 0.0}}, "dezembro": {"DECO": {"V": 2292.0, "C": 229.0, "MesNum": 12, "X": 200.0}, "WEB": {"V": 2232.0, "C": 223.0, "MesNum": 12, "X": 200.0}}}, "2025": {"janeiro": {"DECO": {"V": 150.0, "C": 5.0, "MesNum": 1, "X": 180.0}, "WEB": {"V": 1231.0, "C": 123.0, "MesNum": 1, "X": 180.0}}, "fevereiro": {"DECO": {"V": 380.0, "C": 13.0, "MesNum": 2, "X": 200.0}, "WEB": {"V": 1802.0, "C": 180.0, "MesNum": 2, "X": 200.0}}, "março": {"DECO": {"V": 155.0, "C": 5.0, "MesNum": 3, "X": 200.0}, "WEB": {"V": 1663.0, "C": 166.0, "MesNum": 3, "X": 200.0}}, "abril": {"DECO": {"V": 346.0, "C": 12.0, "MesNum": 4, "X": 200.0}, "WEB": {"V": 1294.0, "C": 129.0, "MesNum": 4, "X": 200.0}}, "maio": {"DECO": {"V": 67.0, "C": 2.0, "MesNum": 5, "X": 200.0}, "WEB": {"V": 1470.0, "C": 147.0, "MesNum": 5, "X": 200.0}}, "junho": {"DECO": {"V": 244.0, "C": 9.0, "MesNum": 6, "X": 200.0}, "WEB": {"V": 2541.0, "C": 254.0, "MesNum": 6, "X": 200.0}}, "julho": {"DECO": {"V": 59.0, "C": 2.0, "MesNum": 7, "X": 350.0}, "WEB": {"V": 3022.0, "C": 302.0, "MesNum": 7, "X": 350.0}}, "agosto": {"DECO": {"V": 80.0, "C": 3.0, "MesNum": 8, "X": 350.0}, "WEB": {"V": 1799.0, "C": 180.0, "MesNum": 8, "X": 350.0}}, "setembro": {"DECO": {"V": 62.0, "C": 2.0, "MesNum": 9, "X": 300.0}, "WEB": {"V": 1009.0, "C": 101.0, "MesNum": 9, "X": 300.0}}, "outubro": {"DECO": {"V": 217.0, "C": 8.0, "MesNum": 10, "X": 200.0}, "WEB": {"V": 1654.0, "C": 165.0, "MesNum": 10, "X": 200.0}}, "novembro": {"DECO": {"V": 2.0, "C": 0.0, "MesNum": 11, "X": 200.0}, "WEB": {"V": 1670.0, "C": 167.0, "MesNum": 11, "X": 200.0}}, "dezembro": {"DECO": {"V": 803.0, "C": 28.0, "MesNum": 12, "X": 250.0}, "WEB": {"V": 3644.0, "C": 364.0, "MesNum": 12, "X": 250.0}}}, "2026": {"janeiro": {"DECO": {"V": 13.0, "C": 0.0, "MesNum": 1, "X": 200.0}, "WEB": {"V": 826.0, "C": 83.0, "MesNum": 1, "X": 200.0}}, "fevereiro": {"DECO": {"V": 177.0, "C": 6.0, "MesNum": 2, "X": 200.0}, "WEB": {"V": 923.0, "C": 92.0, "MesNum": 2, "X": 200.0}}, "março": {"DECO": {"V": 22.0, "C": 1.0, "MesNum": 3, "X": 0.0}, "WEB": {"V": 982.0, "C": 98.0, "MesNum": 3, "X": 0.0}}}};
 let mesesAbertos = {};
 let anosAbertos = {};
 
@@ -51,15 +51,16 @@ for (const ano in dadosAgrupados) {
 }
 
 function renderTabela() {
-  let html = '<table><thead><tr><th>Ano</th><th>Mês</th><th>LeadSource</th><th class="center">Valor (€)</th><th class="center">ValorCalculado (€)</th></tr></thead><tbody>';
+  let html = '<table><thead><tr><th>Ano</th><th>Mês</th><th>LeadSource</th><th class="center">Valor (€)</th><th class="center">ValorCalculado (€)</th><th class="center">Adiantamento</th></tr></thead><tbody>';
 
   for (const ano in dadosAgrupados) {
     const meses = dadosAgrupados[ano];
     const anoAberto = anosAbertos[ano];
 
-    // ordenar meses por MesNum
-    const mesesOrdenados = Object.keys(meses).sort((a,b) => meses[a][Object.keys(meses[a])[0]].MesNum - meses[b][Object.keys(meses[b])[0]].MesNum);
-
+    const mesesOrdenados = Object.keys(meses).sort((a,b) =>
+      meses[a][Object.keys(meses[a])[0]].MesNum -
+      meses[b][Object.keys(meses[b])[0]].MesNum
+    );
 
     let anoRowspan = 0;
     if (anoAberto) {
@@ -72,58 +73,91 @@ function renderTabela() {
     }
 
     let anoPrimeira = true;
-
     if (anoAberto) {
       for (const mes of mesesOrdenados) {
         const Ss = meses[mes];
         const aberto = mesesAbertos[`${ano}-${mes}`] || false;
-        let mesPrimeira = true;
         const leads = Object.keys(Ss);
+        let mesPrimeira = true;
 
         if (aberto) {
           for (const lead of leads) {
             const d = Ss[lead];
             html += '<tr>';
+
             if (anoPrimeira) {
-              html += `<td rowspan="${anoRowspan}"><button class="ano-btn" data-ano="${ano}">${ano}</button></td>`;
+              html += `<td rowspan="${anoRowspan}">
+                <button class="ano-btn" data-ano="${ano}">${ano}</button>
+              </td>`;
               anoPrimeira = false;
             }
+
             if (mesPrimeira) {
-              html += `<td rowspan="${leads.length}"><button class="month-btn" data-ano="${ano}" data-mes="${mes}">${mes}</button></td>`;
+              html += `<td rowspan="${leads.length}">
+                <button class="month-btn" data-ano="${ano}" data-mes="${mes}">${mes}</button>
+              </td>`;
+
+            }
+
+            html += `<td>${lead}</td>
+                    <td class="center">${d.V.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td>
+                    <td class="center">${d.C.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td>`;
+
+            if (mesPrimeira) {
+              // Coluna Adiantamento com rowspan
+              html += `<td rowspan="${leads.length}" class="center">
+                ${d.X != null ? d.X.toLocaleString('pt-PT',{minimumFractionDigits:0}) : ''}
+              </td>`;
               mesPrimeira = false;
             }
-            html += `<td>${lead}</td>
-                     <td class="center">${d.V.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td>
-                     <td class="center">${d.C.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td></tr>`;
+                    
+            html += '</tr>';
           }
         } else {
+          // mês fechado, apenas uma linha
           let t1=0, t2=0;
+          let d = Ss[Object.keys(Ss)[0]];
           for (const lead of leads) {
             t1 += Ss[lead].V;
             t2 += Ss[lead].C;
           }
+
           html += '<tr>';
           if (anoPrimeira) {
-            html += `<td rowspan="${anoRowspan}"><button class="ano-btn" data-ano="${ano}">${ano}</button></td>`;
+            html += `<td rowspan="${anoRowspan}">
+              <button class="ano-btn" data-ano="${ano}">${ano}</button>
+            </td>`;
             anoPrimeira = false;
           }
-          html += `<td colspan="2"><button class="month-btn" data-ano="${ano}" data-mes="${mes}">${mes}</button></td>
-                   <td class="center">${t1.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td>
-                   <td class="center">${t2.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td></tr>`;
+
+          html += `<td colspan="2">
+            <button class="month-btn" data-ano="${ano}" data-mes="${mes}">${mes}</button>
+          </td>
+          <td class="center">${t1.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td>
+          <td class="center">${t2.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td>
+          <td class="center">${d.X != null && d.X !== 0 ? d.X.toLocaleString('pt-PT',{minimumFractionDigits:0}) : ''}</td>
+          </tr>`;
         }
       }
     } else {
       let t1=0, t2=0;
+      let dX = 0;
       for (const mes of mesesOrdenados) {
+        const Sss = meses[mes];
+        let maxXMes = 0;
         for (const lead in meses[mes]) {
           t1 += meses[mes][lead].V;
           t2 += meses[mes][lead].C;
+          if (Sss[lead].X != null) maxXMes = Math.max(maxXMes, Sss[lead].X);
         }
+        dX += maxXMes; // soma dos máximos de cada mês
       }
-      html += `<tr>
+
+      html += `<tr">
         <td colspan="3"><button class="ano-btn" data-ano="${ano}">${ano}</button></td>
         <td class="center subtotal">${t1.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td>
         <td class="center subtotal">${t2.toLocaleString('pt-PT',{minimumFractionDigits:0})}</td>
+        <td class="center subtotal">${dX !== 0 ? dX.toLocaleString('pt-PT',{minimumFractionDigits:0}) : ''}</td>
       </tr>`;
     }
   }
